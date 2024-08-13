@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam Account Search - Starry Sky</title>
+    <style>
+        body {
+            background: url('https://cdn.pixabay.com/photo/2016/11/21/17/13/milky-way-1845232_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #6b8cff, #8ec5fc);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #8ec5fc, #6b8cff);
+        }
+        .results {
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+            width: 60%;
+        }
+        .result-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .no-results {
+            color: #ffdddd;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Steam Account Search - 小哥B君</h1>
+    <input type="text" id="searchInput" placeholder="输入游戏名或部分字符...">
+    <button onclick="search()">搜索</button>
+    <div class="results" id="results"></div>
+
+    <script>
+        const accounts = [
+            {"game": "长途客车模拟器", "account": "agt8754", "password": "Hh200743"},
+            {"game": "德军总部新血脉", "account": "huamao702", "password": "huamao567"},
+            {"game": "德军总部2新巨像", "account": "huanyu965581", "password": "Huanyu963769"},
+            {"game": "使命召唤14全dlc", "account": "agt8713", "password": "Apk90708"},
+            {"game": "刀剑神域", "account": "DJSY100877", "password": "LG930305AAQ"},
+            {"game": "战地模拟器", "account": "agszc5886", "password": "vh76r67u54d"},
+            {"game": "环世界全dlc", "account": "huanshijie1a", "password": "Hh603951a"},
+            {"game": "禁闭求生", "account": "Jh0xkFC70", "password": "Hh6238qun"},
+            {"game": "急速骑行4", "account": "svg65mo88", "password": "Hh3491anm"},
+            {"game": "生化危机2重制版", "account": "rehuixy01", "password": "gsdfg456765(pdd)"},
+            {"game": "辐射4", "account": "junjun888666631", "password": "Xiaohejiaoao31800"},
+            {"game": "生化危机3重制版", "account": "jiaoao18882865", "password": "Xiaohe8696331"},
+            {"game": "正当防卫4", "account": "zibatang4", "password": "GAMEgr8093"},
+            {"game": "黑暗之魂3", "account": "laoliuyx1254", "password": "laoliuwq4366"},
+            {"game": "最终幻想15", "account": "wgio0a", "password": "eqw12fdsew3"},
+            {"game": "刺客信条英灵殿育碧号", "account": "lstea16m@163.com", "password": "Hh603951"},
+            {"game": "骑马与砍杀2", "account": "huamao226", "password": "huamao666"},
+            {"game": "赛博朋克2077", "account": "20game03", "password": "TC123456@"},
+            {"game": "四海兄弟四部曲", "account": "20game02", "password": "TC123456@"},
+            {"game": "巫师3", "account": "jyz1849", "password": "TC123456@"},
+            {"game": "欧洲卡车模拟2", "account": "3205466009ta3", "password": "TC123456@"},
+            {"game": "旋转轮胎", "account": "20game04", "password": "TC123456@"},
+            {"game": "尘埃2.0+4", "account": "3205466009ta6", "password": "TC123456@"}
+        ];
+
+        function search() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = accounts.filter(account => account.game.toLowerCase().includes(query));
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = results.length > 0 ? results.map(result => `
+                <div class="result-item">
+                    <strong>游戏名</strong>: ${result.game}, <strong>账号</strong>: ${result.account}, <strong>密码</strong>: ${result.password}
+                </div>
+            `).join('') : '<div class="no-results">资源库里没有</div>';
+        }
+    </script>
+</body>
+</html>
