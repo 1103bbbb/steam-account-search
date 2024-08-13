@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>账号密码查询</title>
+</head>
+<body>
+    <h1>账号密码查询</h1>
+    <input type="text" id="nameInput" placeholder="输入关键词">
+    <button onclick="findAccount()">查找</button>
+    
+    <h2>结果:</h2>
+    <ul id="result"></ul>
+
+    <script>
+        // 数据集合
+        const data = [
+            {"name": "仁王2", "账号": "renwang2876", "密码": "Acd78456"},
+{"name": "孤岛惊魂原始杀戮全dlc：原始杀戮：steam", "账号": "zcxiaojiejie", "密码": "Huanyu963523"},
+{"name": "孤岛惊魂3:孤岛惊魂3 steam", "账号": "ltx1hnbz533", "密码": "bh5LVFpfvd"},
+{"name": "孤岛惊魂4：steam", "账号": "nxt7jzd5991", "密码": "7Aa20201225"},
+{"name": "孤岛惊魂新曙光全dlc：steam", "账号": "mojieg607密码", "密码": "jkng988a9s12"},
+{"name": "steam", "账号": "xwgk2h密码LS7rbYxh", "密码": "看门狗军团"},
+{"name": "漫威复仇者联盟", "账号": "fczlm120121", "密码": "Lmm120121"},
+{"name": "胡闹厨房2 你好邻居2", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "荒野大镖客", "账号": "3205466009ta1", "密码": "SS123456"},
+{"name": "网吧模拟器", "账号": "knotggj", "密码": "Mgb356hdg"},
+{"name": "赛博朋克", "账号": "20game03", "密码": "TC123456"},
+{"name": "gta5 实况足球2020 古墓丽影崛起 火影忍者4", "账号": "2927242429", "密码": "aijihang789"},
+{"name": "steam", "账号": "ouyeah63", "密码": "孤岛惊魂5"},
+{"name": "Steam", "账号": "xiongking5", "密码": "Steam密码"},
+{"name": "【奥德赛】", "账号": "xiaoshudianwan04", "密码": "1"},
+{"name": "使命召唤14", "账号": "axev871", "密码": "Bobodianwan1"},
+{"name": "奥日2", "账号": "q6707q6707", "密码": "q67076707"},
+{"name": "深海迷航", "账号": "wclsmi", "密码": "HmNTPN2s"},
+{"name": "《港诡实录》", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "《极速骑行4》", "账号": "zphvz736", "密码": "YZH"},
+{"name": "《迷失森林》", "账号": "mishizhisen872", "密码": "Hh6039512"},
+{"name": "《消逝的光芒》", "账号": "20game05", "密码": "TC123456"},
+{"name": "@", "账号": "b18382999", "密码": "a112233668989"},
+{"name": "《一拳超人》", "账号": "yqcr871", "密码": "Hh6039511"},
+{"name": "《街霸5》", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "《胡闹厨房2》", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "《地平线 零之曙光》", "账号": "3205466009ta9", "密码": "TC123456"},
+{"name": "《拟真车祸模拟》", "账号": "xuy2fs", "密码": "0Qt7xe4b"},
+{"name": "《海盗大亨6》", "账号": "jeky26445", "密码": "g9Q0QHbd"},
+{"name": "《打猎模拟器》", "账号": "junjun888666540", "密码": "Xiaohejiaoao516841"},
+{"name": "《你好邻居2》", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "《量子特工》", "账号": "junjun888666225", "密码": "Xiaohejiaoao62143"},
+{"name": "《杀戮尖塔》", "账号": "junjun888666540", "密码": "Xiaohejiaoao516841"},
+{"name": "《潜艇模拟器》", "账号": "p68683", "密码": "q7897978"},
+{"name": "《女主播经济公司》", "账号": "p56810", "密码": "q8769789"},
+{"name": "《天命奇遇》", "账号": "qat8810", "密码": "lin685678"},
+{"name": "《霜寒朋克》", "账号": "zhideng696543", "密码": "Tpoph9118451"},
+{"name": "《波西亚时光》ang《光明记忆》", "账号": "shwjsteam110", "密码": "LG930305"},
+{"name": "《刀剑神域：夺命凶弹》", "账号": "spypt11932531", "密码": "Hg20100303"},
+{"name": "《仁王》", "账号": "renwang6668", "密码": "kk124536"},
+{"name": "《古墓丽影暗影》", "账号": "lklk9021", "密码": "xin12305"},
+{"name": "《太吾绘卷》", "账号": "ttuuhhuu123", "密码": "thwj123twhj"},
+{"name": "《议案追声》", "账号": "p25536", "密码": "q7697876"},
+{"name": "steam", "账号": "jjyy1800jjyy", "密码": "jjyjjy1800"},
+{"name": "底特律变人", "账号": "dssxdm00020", "密码": "dashe00854"},
+{"name": "镜之边缘2 催化剂", "账号": "junjun888666770", "密码": "Xiaohejiaoao46120"},
+{"name": "橘子", "账号": "jiaoaojunjun26", "密码": "6"},
+{"name": "恐鬼症", "账号": "lsliqg", "密码": "jiaoaojunjun693001"},
+{"name": "地铁离去", "账号": "ditie120121", "密码": "Ljm7091265"},
+{"name": "欧卡2", "账号": "ouka120121", "密码": "Myh120121"},
+{"name": "城市天际线", "账号": "chengshitianjixian1a", "密码": "Hh6039511a"},
+{"name": "方舟生存进化全DLC", "账号": "fzscjh871", "密码": "Hh6039511"},
+{"name": "《无主之地3》", "账号": "2685034656", "密码": "lu361400"},
+{"name": "Hh57349105四海兄弟", "账号": "shxd5120121", "密码": "Lmm120121"},
+{"name": "纸人2", "账号": "fz120121", "密码": "Ljm18635275543"},
+{"name": "杀手2", "账号": "jiaoaohehe188827", "密码": "Xiaohehe896312"},
+{"name": "正当防卫4", "账号": "houh8v", "密码": "hailunshuma11"},
+{"name": "火影究极风暴1-4", "账号": "HY100788", "密码": "LGQNMDKK6"},
+{"name": "冰与火之舞", "账号": "chenxi89420", "密码": "chenxi46520"},
+{"name": "欧卡2", "账号": "mcqntgo795", "密码": "Hh603951c1m"},
+{"name": "港诡实录", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "骑马与砍杀2", "账号": "huamao226", "密码": "huamao666"},
+{"name": "天国拯救", "账号": "tianguoa", "密码": "Hh1600531a"},
+{"name": "鬼泣5 维吉尔dlc", "账号": "ggqqggqq1342", "密码": "youyouxxi3662"},
+{"name": "街霸5", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "王国风云2-皇家收藏带22个DLC", "账号": "chenxi33611", "密码": "chenxi02112"},
+{"name": "巫师3：狂猎-季票DLC(含血与酒石之心DLC)", "账号": "huanyu967777", "密码": "Huanyu963366645四海兄弟"},
+{"name": "纸人2", "账号": "fz120121", "密码": "Ljm18635275543"},
+{"name": "杀手2", "账号": "jiaoaohehe188827", "密码": "Xiaohehe896312"},
+{"name": "正当防卫4", "账号": "houh8v", "密码": "hailunshuma11"},
+{"name": "火影究极风暴1-4", "账号": "HY100788", "密码": "LGQNMDKK6"},
+{"name": "冰与火之舞", "账号": "chenxi89420", "密码": "chenxi46520"},
+{"name": "欧卡2", "账号": "mcqntgo795", "密码": "Hh603951c1m"},
+{"name": "港诡实录", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "骑马与砍杀2", "账号": "huamao226", "密码": "huamao666"},
+{"name": "天国拯救", "账号": "tianguoa", "密码": "Hh1600531a"},
+{"name": "鬼泣5 维吉尔dlc", "账号": "ggqqggqq1342", "密码": "youyouxxi3662"},
+{"name": "街霸5", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "王国风云2-皇家收藏带22个DLC", "账号": "chenxi33611", "密码": "chenxi02112"},
+{"name": "巫师3：狂猎-季票DLC(含血与酒石之心DLC)", "账号": "huanyu967777", "密码": "Huanyu963366645"},
+{"name": "GTA5+人类一败涂地", "账号": "oldzhang", "密码": "8"},
+{"name": "海底大猎杀", "账号": "fLhZ5Vk29密码", "密码": "Hh6238qpn"},
+{"name": "尼尔机械纪元", "账号": "gjqtsteam110", "密码": "LG930305"},
+{"name": "生化危机6", "账号": "chenxi89520密码", "密码": "chenxi82021"},
+{"name": "狙击手幽灵战士契约", "账号": "qiyueazl1", "密码": "dn112233"},
+{"name": "仁王2", "账号": "renwang2876", "密码": "Acd78456"},
+{"name": "孤岛惊魂原始杀戮全dlc：原始杀戮：steam", "账号": "zcxiaojiejie", "密码": "Huanyu963523"},
+{"name": "孤岛惊魂3:孤岛惊魂3 steam", "账号": "ltx1hnbz533", "密码": "bh5LVFpfvd"},
+{"name": "孤岛惊魂4：steam", "账号": "nxt7jzd5991", "密码": "7Aa20201225"},
+{"name": "孤岛惊魂新曙光全dlc：steam", "账号": "mojieg607密码", "密码": "jkng988a9s12"},
+{"name": "steam", "账号": "xwgk2h密码LS7rbYxh", "密码": "看门狗军团"},
+{"name": "漫威复仇者联盟", "账号": "fczlm120121", "密码": "Lmm120121"},
+{"name": "胡闹厨房2 你好邻居2", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "荒野大镖客", "账号": "3205466009ta1", "密码": "SS123456"},
+{"name": "网吧模拟器", "账号": "knotggj", "密码": "Mgb356hdg"},
+{"name": "赛博朋克", "账号": "20game03", "密码": "TC123456"},
+{"name": "gta5 实况足球2020 古墓丽影崛起 火影忍者4", "账号": "2927242429", "密码": "aijihang789"},
+{"name": "steam", "账号": "ouyeah63", "密码": "孤岛惊魂5"},
+{"name": "Steam", "账号": "xiongking5", "密码": "Steam密码"},
+{"name": "【奥德赛】", "账号": "xiaoshudianwan04", "密码": "1"},
+{"name": "使命召唤14", "账号": "axev871", "密码": "Bobodianwan1"},
+{"name": "奥日2", "账号": "q6707q6707", "密码": "q67076707"},
+{"name": "深海迷航", "账号": "wclsmi", "密码": "HmNTPN2s"},
+{"name": "《港诡实录》", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "《极速骑行4》", "账号": "zphvz736", "密码": "YZH"},
+{"name": "《迷失森林》", "账号": "mishizhisen872", "密码": "Hh6039512"},
+{"name": "《消逝的光芒》", "账号": "20game05", "密码": "TC123456"},
+{"name": "@", "账号": "b18382999", "密码": "a112233668989"},
+{"name": "《一拳超人》", "账号": "yqcr871", "密码": "Hh6039511"},
+{"name": "《街霸5》", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "《胡闹厨房2》", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "《地平线 零之曙光》", "账号": "3205466009ta9", "密码": "TC123456"},
+{"name": "《拟真车祸模拟》", "账号": "xuy2fs", "密码": "0Qt7xe4b"},
+{"name": "《海盗大亨6》", "账号": "jeky26445", "密码": "g9Q0QHbd"},
+{"name": "《打猎模拟器》", "账号": "junjun888666540", "密码": "Xiaohejiaoao516841"},
+{"name": "《你好邻居2》", "账号": "junjun888666423", "密码": "Xiaohejiaoao18410"},
+{"name": "《量子特工》", "账号": "junjun888666225", "密码": "Xiaohejiaoao62143"},
+{"name": "《杀戮尖塔》", "账号": "junjun888666540", "密码": "Xiaohejiaoao516841"},
+{"name": "《潜艇模拟器》", "账号": "p68683", "密码": "q7897978"},
+{"name": "《女主播经济公司》", "账号": "p56810", "密码": "q8769789"},
+{"name": "《天命奇遇》", "账号": "qat8810", "密码": "lin685678"},
+{"name": "《霜寒朋克》", "账号": "zhideng696543", "密码": "Tpoph9118451"},
+{"name": "《波西亚时光》ang《光明记忆》", "账号": "shwjsteam110", "密码": "LG930305"},
+{"name": "《刀剑神域：夺命凶弹》", "账号": "spypt11932531", "密码": "Hg20100303"},
+{"name": "《仁王》", "账号": "renwang6668", "密码": "kk124536"},
+{"name": "《古墓丽影暗影》", "账号": "lklk9021", "密码": "xin12305"},
+{"name": "《太吾绘卷》", "账号": "ttuuhhuu123", "密码": "thwj123twhj"},
+{"name": "《议案追声》", "账号": "p25536", "密码": "q7697876"},
+{"name": "steam", "账号": "jjyy1800jjyy", "密码": "jjyjjy1800"},
+{"name": "底特律变人", "账号": "dssxdm00020", "密码": "dashe00854"},
+{"name": "镜之边缘2 催化剂", "账号": "junjun888666770", "密码": "Xiaohejiaoao46120"},
+{"name": "橘子", "账号": "jiaoaojunjun26", "密码": "6"},
+{"name": "恐鬼症", "账号": "lsliqg", "密码": "jiaoaojunjun693001"},
+{"name": "地铁离去", "账号": "ditie120121", "密码": "Ljm7091265"},
+{"name": "欧卡2", "账号": "ouka120121", "密码": "Myh120121"},
+{"name": "城市天际线", "账号": "chengshitianjixian1a", "密码": "Hh6039511a"},
+{"name": "方舟生存进化全DLC", "账号": "fzscjh871", "密码": "Hh6039511"},
+{"name": "《无主之地3》", "账号": "2685034656", "密码": "lu361400"},
+{"name": "Hh57349105四海兄弟", "账号": "shxd5120121", "密码": "Lmm120121"},
+{"name": "纸人2", "账号": "fz120121", "密码": "Ljm18635275543"},
+{"name": "杀手2", "账号": "jiaoaohehe188827", "密码": "Xiaohehe896312"},
+{"name": "正当防卫4", "账号": "houh8v", "密码": "hailunshuma11"},
+{"name": "火影究极风暴1-4", "账号": "HY100788", "密码": "LGQNMDKK6"},
+{"name": "冰与火之舞", "账号": "chenxi89420", "密码": "chenxi46520"},
+{"name": "欧卡2", "账号": "mcqntgo795", "密码": "Hh603951c1m"},
+{"name": "港诡实录", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "骑马与砍杀2", "账号": "huamao226", "密码": "huamao666"},
+{"name": "天国拯救", "账号": "tianguoa", "密码": "Hh1600531a"},
+{"name": "鬼泣5 维吉尔dlc", "账号": "ggqqggqq1342", "密码": "youyouxxi3662"},
+{"name": "街霸5", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "王国风云2-皇家收藏带22个DLC", "账号": "chenxi33611", "密码": "chenxi02112"},
+{"name": "巫师3：狂猎-季票DLC(含血与酒石之心DLC)", "账号": "huanyu967777", "密码": "Huanyu963366645四海兄弟"},
+{"name": "纸人2", "账号": "fz120121", "密码": "Ljm18635275543"},
+{"name": "杀手2", "账号": "jiaoaohehe188827", "密码": "Xiaohehe896312"},
+{"name": "正当防卫4", "账号": "houh8v", "密码": "hailunshuma11"},
+{"name": "火影究极风暴1-4", "账号": "HY100788", "密码": "LGQNMDKK6"},
+{"name": "冰与火之舞", "账号": "chenxi89420", "密码": "chenxi46520"},
+{"name": "欧卡2", "账号": "mcqntgo795", "密码": "Hh603951c1m"},
+{"name": "港诡实录", "账号": "clixianwan8", "密码": "Hh6039518"},
+{"name": "骑马与砍杀2", "账号": "huamao226", "密码": "huamao666"},
+{"name": "天国拯救", "账号": "tianguoa", "密码": "Hh1600531a"},
+{"name": "鬼泣5 维吉尔dlc", "账号": "ggqqggqq1342", "密码": "youyouxxi3662"},
+{"name": "街霸5", "账号": "ywtj575", "密码": "mXoM"},
+{"name": "王国风云2-皇家收藏带22个DLC", "账号": "chenxi33611", "密码": "chenxi02112"},
+{"name": "巫师3：狂猎-季票DLC(含血与酒石之心DLC)", "账号": "huanyu967777", "密码": "Huanyu963366645"},
+{"name": "GTA5+人类一败涂地", "账号": "oldzhang", "密码": "8"},
+{"name": "海底大猎杀", "账号": "fLhZ5Vk29密码", "密码": "Hh6238qpn"},
+{"name": "尼尔机械纪元", "账号": "gjqtsteam110", "密码": "LG930305"},
+{"name": "生化危机6", "账号": "chenxi89520密码", "密码": "chenxi82021"},
+{"name": "狙击手幽灵战士契约", "账号": "qiyueazl1", "密码": "dn112233"}
+        ];
+
+        function findAccount() {
+            const keyword = document.getElementById('nameInput').value.trim().toLowerCase();
+
+            const results = data.filter(item => item.name.toLowerCase().includes(keyword));
+
+            const resultList = document.getElementById('result');
+            resultList.innerHTML = '';
+
+            if (results.length > 0) {
+                results.forEach(function(result) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = "名称: " + result.name + ", 账号: " + result.账号 + ", 密码: " + result.密码;
+                    resultList.appendChild(listItem);
+                });
+            } else {
+                resultList.textContent = '未找到匹配项';
+            }
+        }
+    </script>
+</body>
+</html>
