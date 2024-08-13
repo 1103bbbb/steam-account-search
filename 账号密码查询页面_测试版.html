@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>账号密码查询 - 测试版</title>
+</head>
+<body>
+    <h1>账号密码查询 - 测试版</h1>
+    <input type="text" id="nameInput" placeholder="输入关键词">
+    <button onclick="findAccount()">查找</button>
+    
+    <h2>结果:</h2>
+    <ul id="result"></ul>
+
+    <script>
+        // 使用少量数据进行测试
+        const data = [
+            {"name": "使命召唤14", "账号": "agt8713", "密码": "Apk90708"},
+            {"name": "戴森球计划", "账号": "nsy6ap", "密码": "jiaoaojunjun331230"},
+            {"name": "明末饿千里行", "账号": "pxje456", "密码": "jiaoaojunjun66693"}
+        ];
+
+        function findAccount() {
+            const keyword = document.getElementById('nameInput').value.trim().toLowerCase();
+            console.log('关键词:', keyword); // 调试信息
+
+            const results = data.filter(item => item.name.toLowerCase().includes(keyword));
+            console.log('搜索结果:', results); // 调试信息
+
+            const resultList = document.getElementById('result');
+            resultList.innerHTML = '';
+
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `名称: ${result.name}, 账号: ${result.账号}, 密码: ${result.密码}`;
+                    resultList.appendChild(listItem);
+                });
+            } else {
+                resultList.textContent = '未找到匹配项';
+            }
+        }
+    </script>
+</body>
+</html>
