@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小哥B君的Steam账号搜索</title>
+</head>
+<body>
+    <h1>小哥B君的Steam账号搜索</h1>
+    <input type="text" id="searchInput" placeholder="输入游戏名或关键词">
+    <button onclick="search()">搜索</button>
+    <h2>结果:</h2>
+    <ul id="results"></ul>
+
+    <script>
+        const accounts = [
+            {name: "赛博朋克2077", account: "20game03", password: "TC123456@"},
+            {name: "漫威复仇者联盟", account: "fczlm120121", password: "Lmm120121"},
+            {name: "刀剑神域", account: "DJSY100877", password: "LG930305AAQ"},
+            {name: "孤岛惊魂原始杀戮全dlc", account: "zcxiaojiejie", password: "Huanyu963523"},
+            {name: "赛博朋克2077", account: "saibopengke2077a", password: "Hh603951a"},
+            {name: "德军总部新血脉", account: "huamao702", password: "huamao567"},
+            {name: "德军总部2新巨像", account: "huanyu965581", password: "Huanyu963769"},
+            {name: "使命召唤14全dlc", account: "agt8713", password: "Apk90708"},
+            {name: "战地模拟器", account: "agszc5886", password: "vh76r67u54d"},
+            {name: "环世界全dlc", account: "huanshijie1a", password: "Hh603951a"},
+            // Add the rest of the accounts here
+        ];
+
+        function search() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+
+            accounts.forEach(account => {
+                if (account.name.toLowerCase().includes(input)) {
+                    const li = document.createElement('li');
+                    li.textContent = `名称: ${account.name}, 账号: ${account.account}, 密码: ${account.password}`;
+                    results.appendChild(li);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
