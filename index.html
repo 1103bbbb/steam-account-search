@@ -460,8 +460,7 @@
 
             const resultList = document.getElementById('result');
             resultList.innerHTML = '';
-
-            if (results.length > 0) {
+if (results.length > 0) {
                 results.forEach(function(result) {
                     const listItem = document.createElement('li');
                     listItem.textContent = "名称: " + result.name + ", 账号: " + result.account + ", 密码: " + result.password;
@@ -474,3 +473,4 @@
     </script>
 </body>
 </html>
+            
